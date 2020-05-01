@@ -20,17 +20,22 @@ function App() {
   };
 
   const inputCallback = debounce(function (name) {
+    console.log("inputCallback");
     handleRequest(name);
   }, 500);
 
   const handleChange = (e) => {
     e.persist();
     setSearch(e.target.value);
-    const records = findInRecords(rows, e.target.value);
-    if (records && records.length > 0) {
-      setRows(records);
+    if (e.target.value) {
+      const records = findInRecords(rows, e.target.value);
+      if (records && records.length > 0) {
+        setRows(records);
+      } else {
+        inputCallback(e.target.value);
+      }
     } else {
-      inputCallback(e.target.value);
+      handleRequest();
     }
   };
 

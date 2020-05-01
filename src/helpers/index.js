@@ -9,6 +9,7 @@ export function debounce(fn, delay) {
 }
 
 export function findInRecords(arr, str) {
+  console.log("inputCallback");
   return arr.filter(
     (v) => v.name.toLowerCase().indexOf(str.toLowerCase()) > -1
   );
