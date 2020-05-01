@@ -1,0 +1,33 @@
+body {
+  font-family: sans-serif;
+}
+.container {
+  text-align: right;
+  margin: 50px;
+}
+.search-box {
+  border-radius: 5px;
+  box-shadow: none;
+  border: 1px #e1e1e1 solid;
+  height: 40px;
+  font-size: 18px;
+  width: 246px;
+  padding: 0 0 0 5px;
+  color: #a1a1a1;
+}
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1em;
+  margin: 50px;
+}
+.wrapper > div {
+  background: #eee;
+}
+.img {
+  max-width: 100%;
+  height: auto;
+}
+.center {
+  text-align: center;
+}
