@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { getAllProducts } from "./api";
-import { debounce, findInRecords } from "./helpers";
 import "./App.css";
 
 function App() {
@@ -19,25 +18,14 @@ function App() {
     });
   };
 
-  const inputCallback = debounce(function (name) {
-    console.log("inputCallback");
-    handleRequest(name);
-  }, 500);
-
   const handleChange = (e) => {
     e.persist();
     setSearch(e.target.value);
-    if (e.target.value) {
-      const records = findInRecords(rows, e.target.value);
-      if (records && records.length > 0) {
-        setRows(records);
-      } else {
-        inputCallback(e.target.value);
-      }
-    } else {
-      handleRequest();
-    }
   };
+
+  const filteredist = rows.filter(
+    (v) => v.name.toLowerCase().indexOf(search.toLowerCase()) > -1
+  );
 
   return (
     <div className="main">
@@ -53,8 +41,8 @@ function App() {
         />
       </div>
       <div className="wrapper">
-        {rows &&
-          rows.map((v) => (
+        {filteredist &&
+          filteredist.map((v) => (
             <div key={v._id}>
               <img className="img" alt={v.name} src={v.thumbnail} />
               <p className="center">{v.name}</p>
