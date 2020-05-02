@@ -5,15 +5,20 @@ import "./App.css";
 function App() {
   const [search, setSearch] = useState("");
   const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     handleRequest();
   }, []);
 
   const handleRequest = (serch = "") => {
+    setLoading(true);
     getAllProducts(serch).then((res) => {
       if (res.status < 350) {
         setRows(res.data);
+        setLoading(false);
+      } else {
+        alert("An error occured while fetching products.");
       }
     });
   };
@@ -40,6 +45,12 @@ function App() {
           autoFocus
         />
       </div>
+      {loading && (
+        <div className="meter">
+          <span style={{ width: "100%" }}></span>
+          Please wait products are being fetched
+        </div>
+      )}
       <div className="wrapper">
         {filteredist &&
           filteredist.map((v) => (
